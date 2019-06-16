@@ -3,6 +3,9 @@ class Item:
     def __init__(self, name, price):
         self.name = name
         self.original_price = price
+        self.sale_price = None
+        self.date_price_change = None
+
 
     def get_name(self):
         return self.name
@@ -10,6 +13,17 @@ class Item:
     def get_original_price(self):
         return self.original_price
 
+    def set_sale_price(self, price):
+        self.sale_price = price
+
+    def get_sale_price(self):
+        return self.sale_price
+
+    def set_date_price_change(self, new_date):
+        self.date_price_change = new_date
+
+    def get_date_price_change(self):
+        return self.date_price_change
     
 def get_items():
 
