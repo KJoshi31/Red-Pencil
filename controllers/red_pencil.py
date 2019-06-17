@@ -19,14 +19,16 @@ class RedPencil:
 
         increase_decrease = ""
         if self.percentage_difference > 0:
-            increase_decrease = "increase"
+            increase_decrease = "discount increase"
         elif self.percentage_difference < 0:
-            increase_decrease = "decrease"
+            increase_decrease = "discount decrease"
 
-        if increase_decrease != "" self.red_pencil_valid():
+        if increase_decrease != "":
             self.product.set_sale_price(sale_price)
 
 
     def red_pencil_valid(self):
         
         stable_30_days = self.product.date_price_change = None or (self.start_date.days - self.product.get_date_price_change().days >=30)
+        valid_percentage = (self.percentage_difference >= 5.00 and self.percentage_difference <=30.00)
+        valid_discount_type = self.increase_decrease == 'discount increase' 
