@@ -5,11 +5,9 @@ class Item:
         self.original_price = price
         
         self.sale_price = None
-        self.percentage_difference = None
-        self.increase_decrease = None
 
         self.date_price_change = None
-        self.sale_status = None
+        self.sale_status = "N/A"
 
 
     def get_name(self):
@@ -19,18 +17,6 @@ class Item:
         return self.original_price
 
     def set_sale_price(self, price):
-
-        original_product_price = self.original_price
-        sale_price = price
-        self.percentage_difference = round(100 - ((sale_price / original_product_price) * 100), 2)
-
-        increase_decrease = ""
-        if self.percentage_difference > 0:
-            increase_decrease = "increase"
-        elif self.percentage_difference < 0:
-            increase_decrease = "decrease"
-
-        if increase_decrease != "":
             self.sale_price = price
 
     def get_sale_price(self):
