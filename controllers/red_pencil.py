@@ -14,25 +14,23 @@ class RedPencil:
 
     def set_price(self, new_price):
 
-        original_product_price = self.product.get_original_price()
-        sale_price = new_price
-        self.percentage_difference = round(100 - ((sale_price / original_product_price) * 100), 2)
+        if self.product.get_sale_price() == None and self.product.get_original_price() == new_price:
+            raise Exception('Sale price cannot be same as original price when initially set')
 
-        if self.percentage_difference > 0:
-            self.increase_decrease = "discount increase"
-        
-        elif self.percentage_difference < 0:
-            self.increase_decrease = "discount decrease"
+        else:
 
-        if self.increase_decrease != "":
-            if self.product.get_original_price() == new_price:
-                self.product.set_sale_status("N/A")
+            original_product_price = self.product.get_original_price()
+            sale_price = new_price
+            self.percentage_difference = round(100 - ((sale_price / original_product_price) * 100), 2)
+
+            if self.percentage_difference > 0:
+                self.increase_decrease = "discount increase"
             
-            elif self.increase_decrease == 'discount decrease' and self.product.get_sale_status() == 'Red Pencil':
-                self.product.set_sale_status("N/A")                
+            elif self.percentage_difference < 0:
+                self.increase_decrease = "discount decrease"
 
-            self.product.set_sale_price(sale_price, self.start_date)
-
+            if self.increase_decrease != "":
+                self.product.set_sale_price(sale_price, self.start_date)
 
     def red_pencil_valid(self):
 
@@ -52,8 +50,18 @@ class RedPencil:
         valid_percentage = (self.percentage_difference >= 5.00 and self.percentage_difference <=30.00)
         valid_discount_type = self.increase_decrease == 'discount increase' 
 
+
+        if self.product.get_original_price() == self.product.get_sale_price() :
+                self.product.set_sale_status("N/A")
+            
+        elif self.increase_decrease == 'discount decrease' and self.product.get_sale_status() == 'Red Pencil':
+                self.product.set_sale_status("N/A")  
+
         print("day subtraction: {}".format(self.start_date.day - self.product.get_date_price_change().day))
         print("stable for 30 days: {}".format(stable_30_days))
         print("valid percentage: {}".format(valid_percentage))
         print("valid discount type: {}".format(valid_discount_type))
+
+    
+    
         
