@@ -31,12 +31,29 @@ class RedPencil:
             elif self.increase_decrease == 'discount decrease' and self.product.get_sale_status() == 'Red Pencil':
                 self.product.set_sale_status("N/A")                
 
-            self.product.set_sale_price(sale_price)
+            self.product.set_sale_price(sale_price, self.start_date)
 
 
     def red_pencil_valid(self):
-        
-        stable_30_days = self.product.date_price_change = None or (self.start_date.days - self.product.get_date_price_change().days >=30)
+
+        subtracted_dates = self.start_date.day - self.product.get_date_price_change().day
+
+        stable_30_days = None
+
+        if self.product.date_price_change == None:
+            stable_30_days = True
+        elif subtracted_dates == 0:
+            stable_30_days = True
+        elif subtracted_dates >= 30:
+            stable_30_days = True
+        else:
+            stable_30_days = False
+
         valid_percentage = (self.percentage_difference >= 5.00 and self.percentage_difference <=30.00)
         valid_discount_type = self.increase_decrease == 'discount increase' 
 
+        print("day subtraction: {}".format(self.start_date.day - self.product.get_date_price_change().day))
+        print("stable for 30 days: {}".format(stable_30_days))
+        print("valid percentage: {}".format(valid_percentage))
+        print("valid discount type: {}".format(valid_discount_type))
+        

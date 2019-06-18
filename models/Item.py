@@ -16,8 +16,9 @@ class Item:
     def get_original_price(self):
         return self.original_price
 
-    def set_sale_price(self, price):
+    def set_sale_price(self, price, new_date):
             self.sale_price = price
+            self.set_date_price_change(new_date)
 
     def get_sale_price(self):
         return self.sale_price
