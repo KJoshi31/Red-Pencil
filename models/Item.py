@@ -3,8 +3,11 @@ class Item:
     def __init__(self, name, price):
         self.name = name
         self.original_price = price
+        
         self.sale_price = None
+
         self.date_price_change = None
+        self.sale_status = "N/A"
 
 
     def get_name(self):
@@ -13,8 +16,9 @@ class Item:
     def get_original_price(self):
         return self.original_price
 
-    def set_sale_price(self, price):
-        self.sale_price = price
+    def set_sale_price(self, price, new_date):
+            self.sale_price = price
+            self.set_date_price_change(new_date)
 
     def get_sale_price(self):
         return self.sale_price
@@ -24,6 +28,12 @@ class Item:
 
     def get_date_price_change(self):
         return self.date_price_change
+
+    def get_sale_status(self):
+        return self.sale_status
+
+    def set_sale_status(self, value):
+        self.sale_status = value
     
 def get_items():
 
