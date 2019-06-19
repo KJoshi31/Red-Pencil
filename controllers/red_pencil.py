@@ -69,21 +69,25 @@ class RedPencil:
         else:
             stable_30_days = False
 
+        sale_days = (self.end_date - self.start_date).days
+
+        valid_sale_range = sale_days <=30
+
         valid_percentage = (self.percentage_difference >=
                             5.00 and self.percentage_difference <= 30.00)
 
         if self.increase_decrease == 'discount increase' and self.product.get_date_price_change() == None:
 
-            return stable_30_days and valid_percentage
+            return stable_30_days and valid_percentage and valid_sale_range
 
         else:
           discount_valid = None
 
 
-            if self.increase_decrease == 'discount decrease':
-                discount_valid = False
+        if self.increase_decrease == 'discount decrease':
+            discount_valid = False
 
-            elif self.increase_decrease == 'discount increase':
-                discount_valid = True
+        elif self.increase_decrease == 'discount increase':
+            discount_valid = True
 
-            return stable_30_days and valid_percentage and discount_valid
+        return stable_30_days and valid_percentage and valid_sale_range and discount_valid
