@@ -9,6 +9,7 @@ class Item:
         self.date_price_change = None
         self.sale_status = "N/A"
 
+        self.change_counter = 0
 
     def get_name(self):
         return self.name
@@ -17,6 +18,8 @@ class Item:
         return self.original_price
 
     def set_sale_price(self, price, new_date):
+
+            self.change_counter +=1
             self.sale_price = price
             self.set_date_price_change(new_date)
 

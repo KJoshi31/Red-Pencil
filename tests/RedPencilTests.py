@@ -214,8 +214,6 @@ class TestRedPencilController(unittest.TestCase):
 
         rp = RedPencil(start_date, end_date)
 
-        print((rp.end_date - rp.start_date).days)
-
         a = Item("hat", 20.00)
 
         rp.load_product(a)
@@ -234,8 +232,6 @@ class TestRedPencilController(unittest.TestCase):
 
         rp = RedPencil(start_date, end_date)
 
-        print((rp.end_date - rp.start_date).days)
-
         a = Item("hat", 20.00)
 
         rp.load_product(a)
@@ -246,5 +242,58 @@ class TestRedPencilController(unittest.TestCase):
 
         self.assertEqual(a.get_sale_status(), 'red pencil')
 
+    def test_price_increase(self):
+        start_date = date(2019, 6,10)
+        end_date = date(2019, 6, 20)
 
+        rp = RedPencil(start_date, end_date)
 
+        a = Item("hat", 20.00)
+
+        rp.load_product(a)
+
+        rp.set_price(17.00)
+
+        rp.begin_sale()
+
+        rp.set_price(18.00)
+        rp.begin_sale()
+
+        self.assertNotEqual(a.get_sale_status(), "red pencil")
+
+    def test_price_decrease(self):
+        start_date = date(2019, 6,10)
+        end_date = date(2019, 6, 20)
+
+        rp = RedPencil(start_date, end_date)
+
+        a = Item("hat", 20.00)
+
+        rp.load_product(a)
+
+        rp.set_price(17.00)
+
+        rp.begin_sale()
+
+        rp.set_price(15.00)
+
+        self.assertEquals(a.get_sale_status(), 'red pencil')
+
+    def test_invalid_to_red_pencil(self):
+
+        start_date = date(2019, 6,10)
+        end_date = date(2019, 6, 20)
+
+        rp = RedPencil(start_date, end_date)
+
+        a = Item("hat", 20.00)
+
+        rp.load_product(a)
+
+        rp.set_price(11.00)
+
+        rp.begin_sale()
+
+        rp.set_price(15.00)
+
+        self.assertEquals(a.get_sale_status(), 'red pencil')
