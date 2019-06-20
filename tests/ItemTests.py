@@ -1,6 +1,6 @@
 import unittest
 from datetime import date
-from models.Item import Item
+from models.item import Item
 
 
 class TestItemModel(unittest.TestCase):

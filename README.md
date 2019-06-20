@@ -14,17 +14,20 @@ or
 python3 --version
 ```
 
-## Running the program
-```
-placeholder
-```
-
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+Enter the following commands for the specific modules you're wanting to test
 
+Item Tests:
+```
+python3 -m unittest  tests.ItemTests
+```
 
+Red Pencil Tests:
+```
+python3 -m unittest  tests.RedPencilTests
+```
 ## Built With
 
 * [Python](https://www.python.org) - Programming language
